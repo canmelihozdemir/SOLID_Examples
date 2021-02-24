@@ -7,36 +7,32 @@ namespace SOLID_Examples.Open_Closed_Principle.Bad_Code
 {
     public class PlayerTeleport : MonoBehaviour
     {
-        [SerializeField] private Vector3 _teleportAPoint;
-        [SerializeField] private Vector3 _teleportBPoint;
-        [SerializeField] private Vector3 _teleportCPoint;
-        [SerializeField] private string _teleportPointToGo;
 
         private void Start()
         {
-            GetTeleportPoint(_teleportPointToGo);
+            GetTeleportPoint();
         }
 
-        private void GetTeleportPoint(string teleportPointToGo)
+        private void GetTeleportPoint()
         {
-            if (teleportPointToGo.Equals("A"))
+            if (GetComponent<ArcherTeleportPoint>()!=null)
             {
-                transform.position = _teleportAPoint;
+                transform.position = GetComponent<ArcherTeleportPoint>().TeleportPoint;
                 Debug.Log("Oyuncu A noktasına ışınlandı");
             }
-            else if (teleportPointToGo.Equals("B"))
+            else if (GetComponent<WarriorTeleportPoint>() != null)
             {
-                transform.position = _teleportBPoint;
+                transform.position = GetComponent<WarriorTeleportPoint>().TeleportPoint;
                 Debug.Log("Oyuncu B noktasına ışınlandı");
             }
-            else if (teleportPointToGo.Equals("C"))
+            else if (GetComponent<MagicTeleportPoint>() != null)
             {
-                transform.position = _teleportCPoint;
+                transform.position = GetComponent<MagicTeleportPoint>().TeleportPoint;
                 Debug.Log("Oyuncu C noktasına ışınlandı");
             }
             else
             {
-                Debug.Log(teleportPointToGo + " adında bir bölge bulunamadı!");
+                Debug.Log("Herhangi bir bölge bulunamadı!");
             }
             
         }
