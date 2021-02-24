@@ -18,17 +18,17 @@ namespace SOLID_Examples.Open_Closed_Principle.Bad_Code
             if (GetComponent<ArcherTeleportPoint>()!=null)
             {
                 transform.position = GetComponent<ArcherTeleportPoint>().TeleportPoint;
-                Debug.Log("Oyuncu A noktasına ışınlandı");
+                Debug.Log("Oyuncu Okçu bölgesine ışınlandı");
             }
             else if (GetComponent<WarriorTeleportPoint>() != null)
             {
                 transform.position = GetComponent<WarriorTeleportPoint>().TeleportPoint;
-                Debug.Log("Oyuncu B noktasına ışınlandı");
+                Debug.Log("Oyuncu Savaşçı bölgesine ışınlandı");
             }
             else if (GetComponent<MagicTeleportPoint>() != null)
             {
                 transform.position = GetComponent<MagicTeleportPoint>().TeleportPoint;
-                Debug.Log("Oyuncu C noktasına ışınlandı");
+                Debug.Log("Oyuncu Büyücü bölgesine ışınlandı");
             }
             else
             {

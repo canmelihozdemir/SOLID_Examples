@@ -7,23 +7,25 @@ namespace SOLID_Examples.Open_Closed_Principle.Good_Code
 {
     public class PlayerTeleport : MonoBehaviour
     {
-        private BaseTeleport _teleportPointToGo;
+        private BaseTeleportPoint _teleportPointToGo;
 
   
         private void Awake()
         {
-            _teleportPointToGo = GetComponent<BaseTeleport>();
+            _teleportPointToGo = GetComponent<BaseTeleportPoint>();
         }
         private void Start()
         {
             GetTeleportPoint(_teleportPointToGo);
         }
 
-        private void GetTeleportPoint(BaseTeleport teleportPointToGo)
+        private void GetTeleportPoint(BaseTeleportPoint teleportPointToGo)
         {
             if (teleportPointToGo!=null)
             {
-                transform.position = _teleportPointToGo.teleportPoint;
+                transform.position = teleportPointToGo.teleportPoint;
+                teleportPointToGo.WriteTeleportPoint();
+
             }
             else
             {

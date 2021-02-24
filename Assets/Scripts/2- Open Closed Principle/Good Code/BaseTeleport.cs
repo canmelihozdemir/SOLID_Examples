@@ -7,8 +7,9 @@ using UnityEngine;
 
 namespace SOLID_Examples.Open_Closed_Principle.Good_Code
 {
-    public abstract class BaseTeleport:MonoBehaviour
+    public abstract class BaseTeleportPoint:MonoBehaviour
     {
         public Vector3 teleportPoint { get; set; }
+        public abstract void WriteTeleportPoint();
     }
 }

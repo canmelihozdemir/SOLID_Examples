@@ -7,12 +7,16 @@ using UnityEngine;
 
 namespace SOLID_Examples.Open_Closed_Principle.Good_Code
 {
-    public class ArcherTeleportPoint : BaseTeleport
+    public class ArcherTeleportPoint : BaseTeleportPoint
     {
         public ArcherTeleportPoint()
         {
             teleportPoint = new Vector3(2f, 0.75f, 1f);
         }
 
+        public override void WriteTeleportPoint()
+        {
+            Debug.Log("Oyuncu Okçu bölgesine ışınlandı!");
+        }
     }
 }
