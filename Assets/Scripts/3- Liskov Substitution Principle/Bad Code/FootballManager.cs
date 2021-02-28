@@ -8,7 +8,7 @@ namespace SOLID_Examples.Liskov_Substitution_Principle.Bad_Code
     public class FootballManager : MonoBehaviour
     {
         private List<IFootball> _footballPlayers;
-        [SerializeField]private int _footballPlayerId;
+
         public FootballManager()
         {
             InitializeFootballPlayers();
@@ -25,11 +25,18 @@ namespace SOLID_Examples.Liskov_Substitution_Principle.Bad_Code
 
         private void Start()
         {
-            _footballPlayers[_footballPlayerId].TakeTheBall();
-            _footballPlayers[_footballPlayerId].Defend();
-            _footballPlayers[_footballPlayerId].Assist();
-            _footballPlayers[_footballPlayerId].Shoot();
+            ShootTarget();      
         }
 
+        private void ShootTarget()
+        {
+            _footballPlayers.ForEach(players =>
+            {
+                if (!(players is GoalKeeper))
+                {
+                    players.Shoot();
+                }
+            });
+        }
     }
 }
