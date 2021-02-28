@@ -7,12 +7,10 @@ namespace SOLID_Examples.Liskov_Substitution_Principle.Good_Code
 {
     public class FootballManager : MonoBehaviour
     {
-        private Dictionary<string,IFootball> _footballPlayers;
-        private Dictionary<string, ITakeTheBall> _goalKeeper;
-        private Dictionary<string, IDefend> _defence;
-        private Dictionary<string, IAssist> _midfield;
-        private Dictionary<string, IShoot> _forward;
-        [SerializeField]private string _footballPlayerName;
+        private List<IGoalKeeper> _goalKeeperPlayers;
+        private List<IDefence> _defencePlayers;
+        private List<IMidfield> _midfieldPlayers;
+        private List<IForward> _forwardPlayers;
         public FootballManager()
         {
             InitializeFootballPlayers();
@@ -20,79 +18,90 @@ namespace SOLID_Examples.Liskov_Substitution_Principle.Good_Code
 
         private void InitializeFootballPlayers()
         {
-            _footballPlayers = new Dictionary<string,IFootball>();
-            _goalKeeper = new Dictionary<string, ITakeTheBall>();
-            _defence = new Dictionary<string, IDefend>();
-            _midfield = new Dictionary<string, IAssist>();
-            _forward = new Dictionary<string, IShoot>();
+            _goalKeeperPlayers = new List<IGoalKeeper>();
+            _defencePlayers = new List<IDefence>();
+            _midfieldPlayers = new List<IMidfield>();
+            _forwardPlayers = new List<IForward>();
 
-            SetGoalKeeper(new GoalKeeper("Mehmet"));
-            SetDefence(new Defence("Sevgi"));
-            SetMidfield(new Midfield("Okan"));
-            SetForward(new Forward("Gizem"));
+            AddGoalKeeper(new GoalKeeper("Mehmet"));
+            AddDefence(new Defence("Sevgi"));
+            AddMidfield(new Midfield("Okan"));
+            AddMidfield(new Midfield("Eda"));
+            AddMidfield(new Midfield("Recai"));
+            AddForward(new Forward("Gizem"));
             
         }
 
-        private void SetGoalKeeper(GoalKeeper goalKeeper)
+        private void AddGoalKeeper(GoalKeeper goalKeeper)
         {
-            _footballPlayers.Add(goalKeeper.PlayerName,goalKeeper);
-            _goalKeeper.Add(goalKeeper.PlayerName, goalKeeper);
-            _defence.Add(goalKeeper.PlayerName, goalKeeper);
+            _goalKeeperPlayers.Add(goalKeeper);
         }
-        private void SetDefence(Defence defence)
+        private void AddDefence(Defence defence)
         {
-            _footballPlayers.Add(defence.PlayerName, defence);
-            _midfield.Add(defence.PlayerName, defence);
-            _defence.Add(defence.PlayerName, defence);
-            _forward.Add(defence.PlayerName, defence);
+            _defencePlayers.Add(defence);
         }
-        private void SetMidfield(Midfield midfield)
+        private void AddMidfield(Midfield midfield)
         {
-            _footballPlayers.Add(midfield.PlayerName, midfield);
-            _midfield.Add(midfield.PlayerName, midfield);
-            _defence.Add(midfield.PlayerName, midfield);
-            _forward.Add(midfield.PlayerName, midfield);
+            _midfieldPlayers.Add(midfield);
         }
-        private void SetForward(Forward forward)
+        private void AddForward(Forward forward)
         {
-            _footballPlayers.Add(forward.PlayerName, forward);
-            _midfield.Add(forward.PlayerName, forward);
-            _forward.Add(forward.PlayerName, forward);
+            _forwardPlayers.Add(forward);
         }
 
         private void Start()
         {
-            //RunForwardPlayer(_footballPlayerName);
-            RunMidfieldPlayer(_footballPlayerName);
-            //RunDefencePlayer(_footballPlayerName);
-            //RunGoalKeeperPlayer(_footballPlayerName);
+            //Defence();
+            //Shoot();
+            //TakeTheBall();
+            Assist();
         }
-
-        private void RunForwardPlayer(string footballPlayerName)
+        private void Defence()
         {
-            _footballPlayers[_footballPlayerName].Run();
-            _midfield[_footballPlayerName].Assist();
-            _forward[_footballPlayerName].Shoot();
+            _defencePlayers.ForEach(defencePlayer =>
+                {
+                    defencePlayer.Defend();
+                    defencePlayer.Assist();
+                    defencePlayer.Run();
+                    defencePlayer.Shoot();
+                    defencePlayer.Walk();
+                }
+            );
         }
-        private void RunMidfieldPlayer(string footballPlayerName)
+        private void Shoot()
         {
-            _footballPlayers[_footballPlayerName].Run();
-            _midfield[_footballPlayerName].Assist();
-            _forward[_footballPlayerName].Shoot();
-            _defence[_footballPlayerName].Defend();
+            _forwardPlayers.ForEach(forwardPlayer =>
+            {
+                forwardPlayer.Run();
+                forwardPlayer.Assist();
+                forwardPlayer.Shoot();
+                forwardPlayer.Walk();
+            }
+            );
         }
-        private void RunDefencePlayer(string footballPlayerName)
+        private void Assist()
         {
-            _footballPlayers[_footballPlayerName].Run();
-            _midfield[_footballPlayerName].Assist();
-            _forward[_footballPlayerName].Shoot();
-            _defence[_footballPlayerName].Defend();
+            _midfieldPlayers.ForEach(midfieldPlayer =>
+            {
+                midfieldPlayer.Assist();
+                midfieldPlayer.Defend();
+                midfieldPlayer.Run();
+                midfieldPlayer.Shoot();
+                midfieldPlayer.Walk();
+            }
+            );
         }
-        private void RunGoalKeeperPlayer(string footballPlayerName)
+       
+        private void TakeTheBall()
         {
-            _footballPlayers[_footballPlayerName].Run();
-            _goalKeeper[_footballPlayerName].TakeTheBall();
-            _defence[_footballPlayerName].Defend();
+            _goalKeeperPlayers.ForEach(goalKeeperPlayer =>
+            {
+                goalKeeperPlayer.Defend();
+                goalKeeperPlayer.Run();
+                goalKeeperPlayer.TakeTheBall();
+                goalKeeperPlayer.Walk();
+            }
+            );
         }
     }
 }

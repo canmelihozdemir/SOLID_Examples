@@ -325,7 +325,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c009f3bfc144a4aa885f483e945147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _footballPlayerId: 3
 --- !u!4 &979420706
 Transform:
   m_ObjectHideFlags: 0

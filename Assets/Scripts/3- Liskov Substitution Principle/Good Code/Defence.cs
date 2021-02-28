@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SOLID_Examples.Liskov_Substitution_Principle.Good_Code
 {
-    public class Defence : IFootball,IDefend,IAssist,IShoot
+    public class Defence : IDefence
     {
         private string _playerName;
         public string PlayerName { get => _playerName; set => _playerName = value; }
@@ -14,23 +14,26 @@ namespace SOLID_Examples.Liskov_Substitution_Principle.Good_Code
         }
         public void Assist()
         {
-            Debug.Log("Defans assist yapıyor..");
+            Debug.Log("Defans oyuncusu " + PlayerName + " assist yapıyor..");
         }
 
         public void Defend()
         {
-            Debug.Log("Defans defans yapıyor..");
+            Debug.Log("Defans oyuncusu " + PlayerName + " defans yapıyor..");
         }
 
         public void Run()
         {
-            Debug.Log("Defans koşuyor..");
+            Debug.Log("Defans oyuncusu " + PlayerName + " koşuyor..");
         }
 
         public void Shoot()
         {
-            Debug.Log("Defans şut çekiyor.");
+            Debug.Log("Defans oyuncusu " + PlayerName + " şut çekiyor.");
         }
-
+        public void Walk()
+        {
+            Debug.Log("Defans oyuncusu " + PlayerName + " yürüyor..");
+        }
     }
 }

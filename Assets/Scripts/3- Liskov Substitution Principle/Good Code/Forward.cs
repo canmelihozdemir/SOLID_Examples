@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SOLID_Examples.Liskov_Substitution_Principle.Good_Code
 {
-    public class Forward : IFootball,IAssist,IShoot
+    public class Forward : IForward
     {
         private string _playerName;
         public string PlayerName { get => _playerName; set => _playerName = value; }
@@ -14,19 +14,22 @@ namespace SOLID_Examples.Liskov_Substitution_Principle.Good_Code
         }
         public void Assist()
         {
-            Debug.Log("Forvet assist yapıyor..");
+            Debug.Log("Forvet oyuncusu " + PlayerName + " assist yapıyor..");
         }
 
         public void Run()
         {
-            Debug.Log("Forvet koşuyor..");
+            Debug.Log("Forvet oyuncusu " + PlayerName + " koşuyor..");
         }
 
         public void Shoot()
         {
-            Debug.Log("Forvet şut çekiyor.");
+            Debug.Log("Forvet oyuncusu " + PlayerName + " şut çekiyor..");
         }
 
-
+        public void Walk()
+        {
+            Debug.Log("Forvet oyuncusu " + PlayerName + " yürüyor..");
+        }
     }
 }

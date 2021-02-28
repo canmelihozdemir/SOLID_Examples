@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SOLID_Examples.Liskov_Substitution_Principle.Good_Code
 {
-    public class GoalKeeper : IFootball,ITakeTheBall,IDefend
+    public class GoalKeeper : IGoalKeeper
     {
         private string _playerName;
         public string PlayerName { get => _playerName; set => _playerName=value; }
@@ -15,17 +15,22 @@ namespace SOLID_Examples.Liskov_Substitution_Principle.Good_Code
 
         public void Defend()
         {
-            Debug.Log("Kaleci defans yapıyor..");
+            Debug.Log(PlayerName + " adlı kaleci defans yapıyor..");
         }
 
         public void Run()
         {
-            Debug.Log("Kaleci koşuyor..");
+            Debug.Log(PlayerName+" adlı kaleci koşuyor..");
         }
 
         public void TakeTheBall()
         {
-            Debug.Log("Kaleci topu eline alıyor..");
+            Debug.Log(PlayerName + " adlı kaleci topu eline alıyor..");
+        }
+
+        public void Walk()
+        {
+            Debug.Log(PlayerName + " adlı kaleci yürüyor..");
         }
     }
 }
